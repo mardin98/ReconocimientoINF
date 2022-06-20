@@ -1,0 +1,8 @@
+<RCC>
+  <qresource prefix="inf">
+    <file>inf.png</file>
+  </qresource>
+  <qresource prefix="icon">
+    <file>icon.png</file>
+  </qresource>
+</RCC>
