@@ -1,9 +1,3 @@
-# Author BIGBOSS
-# April 2022
-# IOT人脸识别签到系统
-# WX：BIGBOSSyifi
-# Mail：bigbossyifi@gmail.com
-# *-
 
 from PyQt5.QtGui import QImage, QPixmap
 from PyQt5.uic import loadUi
@@ -15,6 +9,7 @@ import numpy as np
 import datetime
 import os
 import csv
+import pymysql
 
 class Ui_OutputDialog(QDialog):
     def __init__(self):
@@ -88,6 +83,12 @@ class Ui_OutputDialog(QDialog):
 
                                 date_time_string = datetime.datetime.now().strftime("%y/%m/%d %H:%M:%S")
                                 f.writelines(f'\n{name},{date_time_string},Ingreso')
+                                con = pymysql.connect(db='datainf', user='root', passwd='', host='localhost', port=3306, autocommit=True)
+                                cur = con.cursor()
+                                sql = f"INSERT INTO registro(usuario, ingreso) VALUES('{name}', '{date_time_string}')"
+                                cur.execute(sql)
+
+
                                 self.ClockInButton.setChecked(False)
 
                                 self.NameLabel.setText(name)
@@ -109,6 +110,10 @@ class Ui_OutputDialog(QDialog):
                             if buttonReply == QMessageBox.Yes:
                                 date_time_string = datetime.datetime.now().strftime("%y/%m/%d %H:%M:%S")
                                 f.writelines(f'\n{name},{date_time_string},Salio')
+                                con = pymysql.connect(db='datainf', user='root', passwd='', host='localhost', port=3306, autocommit=True)
+                                cur = con.cursor()
+                                sql = f"INSERT INTO registro(salio ) VALUES('{name}', '{date_time_string}')"
+                                cur.execute(sql)
                                 self.ClockOutButton.setChecked(False)
 
                                 self.NameLabel.setText(name)
