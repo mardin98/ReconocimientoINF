@@ -112,7 +112,7 @@ class Ui_OutputDialog(QDialog):
                                 f.writelines(f'\n{name},{date_time_string},Salio')
                                 con = pymysql.connect(db='datainf', user='root', passwd='', host='localhost', port=3306, autocommit=True)
                                 cur = con.cursor()
-                                sql = f"INSERT INTO registro(salio ) VALUES('{name}', '{date_time_string}')"
+                                sql = f"INSERT INTO salida(usuario, salida) VALUES('{name}', '{date_time_string}')"
                                 cur.execute(sql)
                                 self.ClockOutButton.setChecked(False)
 
